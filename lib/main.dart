@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:quizzler/quiz_brain.dart';
+import 'question.dart';
+
+QuizBrain quizBrain = QuizBrain();
 
 void main() => runApp(Quizzler());
 
@@ -28,13 +32,15 @@ class _QuizPageState extends State<QuizPage> {
 
   List<Icon> scoreKeeper =[];
 
-  List<String> questions =[
+  /*List<String> questions =[
     'You can lead a cow down stairs but not up stairs.',
     'Approximately one quarter of human bones are in the feet.',
     'A slug\'s blood is green.'
   ];
 
-  List<bool> answers = [ false, true, true];
+  List<bool> answers = [ false, true, true];*/
+
+
 
   int questionNumber = 0;
 
@@ -50,7 +56,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                questions[questionNumber],
+                quizBrain.questionBank[questionNumber].questionText,
 
                 //'This is where the question text will go.',
                 textAlign: TextAlign.center,
@@ -76,7 +82,8 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                bool correctAnswer = answers[questionNumber];
+                bool correctAnswer = quizBrain.questionBank[questionNumber]
+                    .questionAnswer;
                 if (correctAnswer == true) {
                   print('User got it right');
                 } else {
@@ -105,7 +112,8 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                bool correctAnswer = answers[questionNumber];
+                bool correctAnswer = quizBrain.questionBank[questionNumber]
+                    .questionAnswer;
                 if (correctAnswer == false) {
                   print('User got it right');
                 } else {
